@@ -23,17 +23,9 @@ jobs:
         with:
             mongodb-version: 6.0
             mongodb-port: ${{ secrets.MONGO_DB_PORT }}
-      - name: Setting variables
-        run: |
-          echo "MONGO_DB_HOST=${dbhost}" >> $GITHUB_ENV
-          echo "MONGO_DB_PORT=${dbport}" >> $GITHUB_ENV
-          echo "MONGO_DB_USR= >> $GITHUB_ENV
-          echo "MONGO_DB_PWD= >> $GITHUB_ENV
       - name: Imprimir secretos
         run: |
             echo "$MONGO_DB_HOST"
-            echo "$MONGO_DB_PORT"
-            echo "$MONGO_DB_PWD"
       - name: Install dependecies
         run: npm install
       - name: Lint
