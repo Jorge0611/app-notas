@@ -9,8 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      dbhost: ${{secrets.MONGO_DB_HOST}}
-      dbport: ${{secrets.MONGO_DB_PORT}}
+      MONGO_DB_HOST: ${{secrets.MONGO_DB_HOST}}
+      MONGO_DB_PORT: ${{secrets.MONGO_DB_PORT}}
+      MONGO_DB_PWD:
+      MONGO_DB_USR:
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,9 +26,6 @@ jobs:
         with:
             mongodb-version: 6.0
             mongodb-port: ${{ secrets.MONGO_DB_PORT }}
-      - name: Imprimir secretos
-        run: |
-            echo $MONGO_DB_HOST
       - name: Install dependecies
         run: npm install
       - name: Lint
