@@ -17,6 +17,14 @@ jobs:
           node-version: 18
       - name: Clean APT cache
         run: sudo apt-get clean
+      - name: Disable Snapd
+        run: sudo systemctl stop snapd
+      - name: Install Docker
+        run: |
+          curl -fsSL https://get.docker.com | sudo sh
+          sudo usermod -aG docker $USER
+      - name: Restart Docker
+        run: sudo service docker restart    
       - name: Set up Docker Compose
         run: |
             sudo apt-get update
