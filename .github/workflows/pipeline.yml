@@ -14,27 +14,11 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - name: Clean APT cache
-        run: sudo apt-get clean
-      - name: Disable Snapd
-        run: sudo systemctl stop snapd
-      - name: Install Docker
-        run: |
-          curl -fsSL https://get.docker.com | sudo sh
-          sudo usermod -aG docker $USER
-      - name: Restart Docker
-        run: sudo service docker restart    
-      - name: Set up Docker Compose
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y docker.io docker-compose
-            sudo docker-compose --version
-  
-      - name: Build and start MongoDB container
-        run: |
-            docker-compose -f docker-compose.yml up -d
-            sleep 10 # Espera unos segundos para que MongoDB inicie      
+          node-version: 18  
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+            mongodb-version: 6.0
       - name: Install dependecies
         run: npm install
       - name: Lint
