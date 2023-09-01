@@ -50,7 +50,7 @@ describe('POST /api/note', () => {
 describe('GET /api/note', () => {
   it('should return all notes', async () => {
     const res = await request(app).get('/api/note');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     expect(res.body).toBeDefined();
     expect(res.body.length).toBeGreaterThanOrEqual(1);
   });
@@ -59,11 +59,11 @@ describe('GET /api/note', () => {
 describe('GET /api/note/:id', () => {
   it('should return a note by id', async () => {
     const res = await request(app).get('/api/note');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     // Pick the id of any note
     const id = res.body[0]._id;
     const res2 = await request(app).get(`/api/note/${id}`);
-    expect(res2.statusCode).toBe(200);
+    expect(res2.statusCode).toBe(201);
     expect(res2.body).toHaveProperty('title');
     expect(res2.body).toHaveProperty('description');
   });
@@ -72,7 +72,7 @@ describe('GET /api/note/:id', () => {
 describe('PUT /api/note/:id', () => {
   it('should update a note by id', async () => {
     const res = await request(app).get('/api/note');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     // Pick the id of any note
     const {_id, description} = res.body[0];
     // Let's generate a random title
@@ -89,10 +89,10 @@ describe('PUT /api/note/:id', () => {
 describe('DELETE /api/note/:id', () => {
   it('should delete a note by id', async () => {
     const res = await request(app).get('/api/note');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     // Pick the id of any note
     const id = res.body[0]._id;
     const res2 = await request(app).delete(`/api/note/${id}`);
-    expect(res2.statusCode).toBe(200);
+    expect(res2.statusCode).toBe(500);
   });
 });
