@@ -3,13 +3,11 @@ const process = require('process');
 // eslint-disable-next-line no-unused-vars
 const {pus} = require('os');
 
-let nCpu = cpus().length;
-nCpu = nCpu > 4 ? 4 : nCpu;
 
 if (cluster.isPrimary) {
   console.info(`Primary ${process.pid} is running.`);
 
-  for (let i = 0; i < nCpu; i++) {
+  for (let i = 0; i < 4; i++) {
     cluster.fork();
   }
 
