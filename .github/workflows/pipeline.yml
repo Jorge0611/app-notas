@@ -29,6 +29,11 @@ jobs:
           echo "MONGO_DB_PORT=${dbport}" >> $GITHUB_ENV
           echo "MONGO_DB_USR= >> $GITHUB_ENV
           echo "MONGO_DB_PWD= >> $GITHUB_ENV
+      - name: Imprimir secretos
+        run: |
+            echo "$MONGO_DB_HOST"
+            echo "$MONGO_DB_PORT"
+            echo "$MONGO_DB_PWD"
       - name: Install dependecies
         run: npm install
       - name: Lint
