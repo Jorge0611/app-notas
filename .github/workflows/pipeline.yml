@@ -25,7 +25,7 @@ jobs:
             mongodb-port: ${{ secrets.MONGO_DB_PORT }}
       - name: Imprimir secretos
         run: |
-            echo "$MONGO_DB_HOST"
+            echo $MONGO_DB_HOST
       - name: Install dependecies
         run: npm install
       - name: Lint
