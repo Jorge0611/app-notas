@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
 const Notes = require('./database'); // Importa el modelo de Notas
 const data = require('./notes.json');

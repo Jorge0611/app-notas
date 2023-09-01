@@ -1,6 +1,7 @@
-const cluster = require("cluster");
-const process = require("process");
-const { cpus } = require("os");
+const cluster = require('cluster');
+const process = require('process');
+// eslint-disable-next-line no-unused-vars
+const {pus} = require('os');
 
 let nCpu = cpus().length;
 nCpu = nCpu > 4 ? 4 : nCpu;
@@ -12,10 +13,10 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 
-  cluster.on("exit", (worker, code, signal) => {
+  cluster.on('exit', (worker, code, signal) => {
     console.info(`Worker ${worker.process.pid} died.`);
   });
 } else {
   console.info(`Worker ${process.pid} started.`);
-  require("./server");
+  require('./server');
 }
