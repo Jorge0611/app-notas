@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      dbhost: ${{secrets.MONGO_DB_HOST}}
+      dbport: ${{secrets.MONGO_DB_PORT}}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -19,6 +22,13 @@ jobs:
         uses: supercharge/mongodb-github-action@1.10.0
         with:
             mongodb-version: 6.0
+            mongodb-port: ${{ secrets.MONGO_DB_PORT }}
+      - name: Setting variables
+        run: |
+          echo "MONGO_DB_HOST=${dbhost}" >> $GITHUB_ENV
+          echo "MONGO_DB_PORT=${dbport}" >> $GITHUB_ENV
+          echo "MONGO_DB_USR= >> $GITHUB_ENV
+          echo "MONGO_DB_PWD= >> $GITHUB_ENV
       - name: Install dependecies
         run: npm install
       - name: Lint
