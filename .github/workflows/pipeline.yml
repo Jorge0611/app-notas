@@ -30,7 +30,7 @@ jobs:
         run: npm install
       - name: Lint
         run: npm run lint
-      - name: build
-        run: npm run start
+      - name: seed database
+        run: npm run seed
       - name: tests
         run: npm run test
