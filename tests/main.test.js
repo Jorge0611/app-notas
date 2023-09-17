@@ -89,7 +89,7 @@ describe('PUT /api/note/:id', () => {
 describe('DELETE /api/note/:id', () => {
   it('should delete a note by id', async () => {
     const res = await request(app).get('/api/note');
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     // Pick the id of any note
     const id = res.body[0]._id;
     const res2 = await request(app).delete(`/api/note/${id}`);
