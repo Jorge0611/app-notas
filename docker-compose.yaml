@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app-notas:
+    container_name: app-notas
+    build:
+      context: /usr/src/app
+    ports:
+      - 3001:3001
+  frontend:
+    container_name: sneaker-city
+    links:
+      - backend
+    build:
+      context: ./sneaker-city
+    ports:
+      - 3000:3000

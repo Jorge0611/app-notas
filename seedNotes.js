@@ -3,14 +3,20 @@ const mongoose = require('mongoose');
 const Notes = require('./database'); // Importa el modelo de Notas
 const data = require('./notes.json');
 
+// add .env support
+require('dotenv').config();
+
+
 const {MONGO_DB_USR, MONGO_DB_PWD, MONGO_DB_HOST, MONGO_DB_PORT} =
   process.env;
 const credentials = MONGO_DB_USR ? `${MONGO_DB_USR}:${MONGO_DB_PWD}@` : '';
 const mongoURI = `mongodb://${credentials}${MONGO_DB_HOST}:${MONGO_DB_PORT}/`;
 
+console.log(MONGO_DB_HOST);
+
 const seedDatabase = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017', {
+    await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
