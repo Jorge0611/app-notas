@@ -1,13 +1,13 @@
 FROM node:latest
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
-COPY package*.json ./
+COPY package.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install
 
 # Bundle app source
 COPY . .
@@ -15,8 +15,11 @@ COPY . .
 # Expose port 3000
 EXPOSE 3000
 
-# Load env variables
+# Load environment variables
 ENV $(cat .env | xargs)
 
+# Run migrations
+RUN yarn seed
+
 # Run the app
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]

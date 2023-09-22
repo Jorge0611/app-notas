@@ -12,8 +12,6 @@ const {MONGO_DB_USR, MONGO_DB_PWD, MONGO_DB_HOST, MONGO_DB_PORT} =
 const credentials = MONGO_DB_USR ? `${MONGO_DB_USR}:${MONGO_DB_PWD}@` : '';
 const mongoURI = `mongodb://${credentials}${MONGO_DB_HOST}:${MONGO_DB_PORT}/`;
 
-console.log(MONGO_DB_HOST);
-
 const seedDatabase = async () => {
   try {
     await mongoose.connect(mongoURI, {
@@ -38,4 +36,6 @@ const seedDatabase = async () => {
   }
 };
 
-seedDatabase();
+seedDatabase().then(() => {
+  console.log("Entries created");
+});

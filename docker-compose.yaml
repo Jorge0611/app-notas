@@ -1,16 +1,21 @@
 version: '3.8'
 services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - 27017:27017
   app-notas:
     container_name: app-notas
-    build:
-      context: /usr/src/app
-    ports:
-      - 3001:3001
-  frontend:
-    container_name: sneaker-city
-    links:
-      - backend
-    build:
-      context: ./sneaker-city
+    restart: always
     ports:
       - 3000:3000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    
+    
+  
